@@ -306,6 +306,20 @@
 }
 .guide-split-card__btn:hover { background: rgba(255,255,255,.85); box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
 
+/* ===== ALL CITIES BUTTON ===== */
+.guide-all-cities { text-align: center; margin-top: 32px; }
+.guide-all-cities__btn {
+  display: inline-block;
+  background: var(--guide-primary);
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 100px;
+  transition: var(--guide-transition);
+}
+.guide-all-cities__btn:hover { background: var(--guide-primary-dark); transform: translateY(-1px); }
+
 /* ===== CTA BANNER ===== */
 .guide-cta {
   background: linear-gradient(135deg, #20A1FF 0%, #20C9FF 100%);
@@ -858,8 +872,8 @@
           </div>
         </div>
       </div>
-      <div style="text-align:center; margin-top:32px;">
-        <a href="/города/" class="guide-split-card__btn" style="background:var(--guide-primary); color:#fff; padding:12px 28px; font-size:15px;">Все города →</a>
+      <div class="guide-all-cities">
+        <a href="/путеводитель/города/" class="guide-all-cities__btn">Все города →</a>
       </div>
     </div>
   </section>
