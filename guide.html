@@ -293,13 +293,13 @@
   gap: 6px;
   padding: 10px 22px;
   background: #fff;
-  color: var(--guide-text);
+  color: rgb(26, 33, 40);
   border-radius: 100px;
   font-size: 14px;
   font-weight: 600;
   transition: var(--guide-transition);
 }
-.guide-split-card__btn:hover { background: var(--guide-primary); color: #fff; }
+.guide-split-card__btn:hover { background: rgba(255,255,255,.85); box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
 
 /* ===== CTA BANNER ===== */
 .guide-cta {
@@ -856,33 +856,82 @@
     </div>
   </section>
 
-  <!-- ===== WHY GDEOTEL ===== -->
-  <section class="guide-section guide-section--alt">
+  <!-- ===== WHY GDEOTEL (carousel) ===== -->
+  <section class="guide-carousel-section">
     <div class="guide-container">
-      <div class="guide-section__header">
-        <h2>Почему это удобно на GdeOtel.ru</h2>
-        <p>От идеи поездки — к выбору отеля без лишних шагов.</p>
+      <div class="guide-section__header" style="display:flex; align-items:flex-end; justify-content:space-between; text-align:left;">
+        <div>
+          <h2>Почему это удобно на GdeOtel.ru</h2>
+          <p style="margin:0;">От идеи поездки — к выбору отеля без лишних шагов.</p>
+        </div>
+        <div class="guide-carousel-arrows">
+          <button class="guide-carousel-arrow" onclick="document.getElementById('whyTrack').scrollBy({left:-356,behavior:'smooth'})" aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="guide-carousel-arrow" onclick="document.getElementById('whyTrack').scrollBy({left:356,behavior:'smooth'})" aria-label="Вперёд">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="guide-features" style="grid-template-columns: repeat(4, 1fr);">
-        <div class="guide-feature" style="text-align:center;">
-          <div class="guide-feature__icon" style="margin:0 auto 16px; background:#fef3c7;">1️⃣</div>
-          <h3>Выбор направления</h3>
-          <p>Изучите страну, город или курорт и поймите, какой формат поездки подходит.</p>
-        </div>
-        <div class="guide-feature" style="text-align:center;">
-          <div class="guide-feature__icon" style="margin:0 auto 16px; background:#dbeafe;">2️⃣</div>
-          <h3>Выбор локации</h3>
-          <p>Узнайте, где удобнее остановиться: в центре, у моря, в тихом районе.</p>
-        </div>
-        <div class="guide-feature" style="text-align:center;">
-          <div class="guide-feature__icon" style="margin:0 auto 16px; background:#d1fae5;">3️⃣</div>
-          <h3>Сравнение цен</h3>
-          <p>Переходите к сравнению цен на отели и гостиницы прямо из путеводителя.</p>
-        </div>
-        <div class="guide-feature" style="text-align:center;">
-          <div class="guide-feature__icon" style="margin:0 auto 16px; background:#ede9fe;">4️⃣</div>
-          <h3>Бронирование</h3>
-          <p>Минимум шагов от вдохновения до бронирования подходящего варианта.</p>
+      <div class="guide-carousel-wrap">
+        <div class="guide-carousel-track" id="whyTrack">
+
+          <a href="/путеводитель/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=680&h=840&fit=crop" alt="Выбор направления" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Шаг 1</span>
+            </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Выбор направления</h3>
+                <p>Изучите страну, город или курорт и поймите, какой формат подходит</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/путеводитель/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=680&h=840&fit=crop" alt="Выбор локации" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Шаг 2</span>
+            </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Выбор локации</h3>
+                <p>Где удобнее остановиться: в центре, у моря, в тихом районе</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/отели/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1586611292717-f828b167408c?w=680&h=840&fit=crop" alt="Сравнение цен" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Шаг 3</span>
+            </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Сравнение цен</h3>
+                <p>Сравните цены на отели и гостиницы прямо из путеводителя</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/отели/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=680&h=840&fit=crop" alt="Бронирование" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Шаг 4</span>
+            </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Бронирование</h3>
+                <p>Минимум шагов от вдохновения до бронирования</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
         </div>
       </div>
     </div>
