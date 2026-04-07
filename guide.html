@@ -56,8 +56,9 @@
   border: 1px solid rgba(255,255,255,.2);
   border-radius: 100px;
   padding: 6px 16px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .02em;
   margin-bottom: 20px;
 }
 .guide-hero h1 {
@@ -304,21 +305,23 @@
   font-weight: 600;
   transition: var(--guide-transition);
 }
-.guide-split-card__btn:hover { background: rgba(255,255,255,.85); box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
+.guide-split-card__btn:hover { box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
 
 /* ===== ALL CITIES BUTTON ===== */
 .guide-all-cities { text-align: center; margin-top: 32px; }
-.guide-all-cities__btn {
+.guide-page .guide-all-cities__btn,
+.guide-page a.guide-all-cities__btn {
   display: inline-block;
   background: var(--guide-primary);
-  color: #fff;
+  color: #fff !important;
   padding: 12px 28px;
   font-size: 15px;
   font-weight: 600;
   border-radius: 100px;
   transition: var(--guide-transition);
 }
-.guide-all-cities__btn:hover { background: var(--guide-primary-dark); transform: translateY(-1px); }
+.guide-page .guide-all-cities__btn:hover,
+.guide-page a.guide-all-cities__btn:hover { color: #fff !important; transform: translateY(-1px); }
 
 /* ===== CTA BANNER ===== */
 .guide-cta {
@@ -342,7 +345,7 @@
   font-weight: 700;
   transition: var(--guide-transition);
 }
-.guide-cta__btn:hover { background: rgba(255,255,255,.85); box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
+.guide-cta__btn:hover { box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
 
 /* ===== CAROUSEL SECTION (light, ArticleCard style) ===== */
 .guide-carousel-section {
@@ -530,7 +533,7 @@
   <!-- ===== HERO ===== -->
   <section class="guide-hero">
     <div class="guide-container guide-hero__inner">
-      <div class="guide-hero__badge">✈️ Путеводитель GdeOtel.ru — 2026</div>
+      <div class="guide-hero__badge">Путеводитель GdeOtel.ru — 2026</div>
       <h1>Куда поехать, что посмотреть<br>и где удобнее остановиться</h1>
       <p class="guide-hero__sub">Выбирайте направление для отпуска, коротких поездок и путешествий по России и за границу. Узнайте, когда лучше ехать, что смотреть и где жить — и сразу сравнивайте цены на отели.</p>
       <div class="guide-hero__nav">
@@ -608,7 +611,7 @@
           </a>
 
           <a href="/путеводитель/египет/" class="guide-carousel-card">
-            <img src="https://images.unsplash.com/photo-1539768942893-daf53e736b68?w=680&h=840&fit=crop" alt="Сколько дней" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1587975844577-56dfe5d3fca8?w=680&h=840&fit=crop" alt="Сколько дней" loading="lazy">
             <div class="guide-carousel-card__tags">
               <span class="guide-carousel-card__tag">Планирование</span>
             </div>
@@ -622,7 +625,7 @@
           </a>
 
           <a href="/путеводитель/россия/дагестан/" class="guide-carousel-card">
-            <img src="https://images.unsplash.com/photo-1625225233840-695456021cde?w=680&h=840&fit=crop" alt="Формат отдыха" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1665235482401-c3c7f19b35ba?w=680&h=840&fit=crop" alt="Формат отдыха" loading="lazy">
             <div class="guide-carousel-card__tags">
               <span class="guide-carousel-card__tag">Активности</span>
               <span class="guide-carousel-card__tag">Природа</span>
@@ -679,7 +682,7 @@
 
         <a href="/путеводитель/египет/" class="guide-dest-card">
           <div class="guide-dest-card__img">
-            <img src="https://images.unsplash.com/photo-1539768942893-daf53e736b68?w=600&h=360&fit=crop" alt="Египет" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1502640403806-cf2ac7a5d37a?w=600&h=360&fit=crop" alt="Египет" loading="lazy">
             <span class="guide-dest-card__tag">Круглый год</span>
           </div>
           <div class="guide-dest-card__body">
@@ -738,7 +741,7 @@
 
         <a href="/путеводитель/россия/калининград/" class="guide-dest-card">
           <div class="guide-dest-card__img">
-            <img src="https://images.unsplash.com/photo-1580745294071-9038dbcb6a1e?w=600&h=360&fit=crop" alt="Калининград" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1727428610256-54bd1a6cd3c2?w=600&h=360&fit=crop" alt="Калининград" loading="lazy">
           </div>
           <div class="guide-dest-card__body">
             <div class="guide-dest-card__title">Калининград</div>
@@ -749,7 +752,7 @@
 
         <a href="/путеводитель/россия/дагестан/" class="guide-dest-card">
           <div class="guide-dest-card__img">
-            <img src="https://images.unsplash.com/photo-1625225233840-695456021cde?w=600&h=360&fit=crop" alt="Дагестан" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1609721198187-fd385fbc94d4?w=600&h=360&fit=crop" alt="Дагестан" loading="lazy">
             <span class="guide-dest-card__tag">Открытие</span>
           </div>
           <div class="guide-dest-card__body">
