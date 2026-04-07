@@ -1,0 +1,976 @@
+<style>
+/* ===== CITIES PAGE STYLES ===== */
+:root {
+  --guide-primary: #2563eb;
+  --guide-primary-dark: #1d4ed8;
+  --guide-accent: #f59e0b;
+  --guide-accent-pink: #ec4899;
+  --guide-accent-emerald: #10b981;
+  --guide-accent-violet: #8b5cf6;
+  --guide-accent-orange: #f97316;
+  --guide-bg: #ffffff;
+  --guide-card-bg: #ffffff;
+  --guide-text: #1e293b;
+  --guide-text-secondary: #64748b;
+  --guide-border: #e2e8f0;
+  --guide-radius: 16px;
+  --guide-radius-sm: 10px;
+  --guide-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+  --guide-shadow-hover: 0 4px 16px rgba(0,0,0,.10), 0 8px 32px rgba(0,0,0,.06);
+  --guide-transition: .25s cubic-bezier(.4,0,.2,1);
+  --guide-max-w: 1200px;
+}
+
+/* Reset */
+.guide-page *, .guide-page *::before, .guide-page *::after { box-sizing: border-box; }
+.guide-page { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--guide-text); line-height: 1.6; background: var(--guide-bg); }
+.guide-page img { max-width: 100%; height: auto; display: block; }
+.guide-page a { text-decoration: none; }
+.guide-container { max-width: var(--guide-max-w); margin: 0 auto; padding: 0 20px; }
+
+/* ===== HERO ===== */
+.guide-hero {
+  position: relative;
+  background: linear-gradient(135deg, #20A1FF 0%, #20C9FF 100%);
+  padding: 64px 0 56px;
+  overflow: hidden;
+  color: #fff;
+}
+.guide-hero__inner { position: relative; z-index: 1; text-align: center; }
+.guide-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.guide-hero h1 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -.02em;
+}
+.guide-hero__sub {
+  font-size: clamp(15px, 2vw, 18px);
+  opacity: .88;
+  max-width: 640px;
+  margin: 0 auto 32px;
+  line-height: 1.55;
+}
+.guide-hero__nav {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.guide-hero__nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--guide-transition);
+}
+.guide-hero__nav a.--primary {
+  background: #fff;
+  color: var(--guide-primary);
+}
+.guide-hero__nav a.--primary:hover { background: #f0f4ff; transform: translateY(-1px); }
+.guide-hero__nav a.--accent {
+  background: var(--guide-accent-pink);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
+}
+.guide-hero__nav a.--accent:hover { background: #db2777; transform: translateY(-1px); }
+.guide-hero__nav a.--outline {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
+}
+.guide-hero__nav a.--outline:hover { background: rgba(255,255,255,.2); }
+
+/* ===== SECTION COMMON ===== */
+.guide-section { padding: 56px 0; }
+.guide-section--alt { background: #f8fafc; }
+.guide-section__header { text-align: center; margin-bottom: 40px; }
+.guide-section__header h2 {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  margin: 0 0 10px;
+  letter-spacing: -.01em;
+}
+.guide-section__header p {
+  color: var(--guide-text-secondary);
+  font-size: 15px;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ===== ACCENT DIVIDER ===== */
+.guide-accent-divider {
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+  margin: 0;
+  background: linear-gradient(90deg, var(--guide-accent-pink), var(--guide-accent), var(--guide-accent-emerald), var(--guide-primary), var(--guide-accent-violet));
+}
+
+/* ===== CITY CARDS GRID ===== */
+.guide-cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+}
+.guide-city-card {
+  position: relative;
+  border-radius: var(--guide-radius);
+  overflow: hidden;
+  height: 320px;
+  display: flex;
+  align-items: flex-end;
+  background: #e2e8f0;
+  transition: var(--guide-transition);
+}
+.guide-city-card:hover { transform: translateY(-4px); box-shadow: var(--guide-shadow-hover); }
+.guide-city-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.guide-city-card:hover img { transform: scale(1.06); }
+.guide-city-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.08) 55%);
+  z-index: 1;
+}
+.guide-city-card__body {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  width: 100%;
+}
+.guide-city-card__accent-line {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.guide-city-card__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+}
+.guide-city-card__sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.8);
+  margin: 0;
+  line-height: 1.4;
+}
+.guide-city-card__tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255,255,255,.7);
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+/* tag accent colors */
+.guide-city-card__tag.--pink { border-color: rgba(236,72,153,.7); background: rgba(236,72,153,.25); }
+.guide-city-card__tag.--amber { border-color: rgba(245,158,11,.7); background: rgba(245,158,11,.25); }
+.guide-city-card__tag.--emerald { border-color: rgba(16,185,129,.7); background: rgba(16,185,129,.25); }
+.guide-city-card__tag.--violet { border-color: rgba(139,92,246,.7); background: rgba(139,92,246,.25); }
+.guide-city-card__tag.--blue { border-color: rgba(37,99,235,.7); background: rgba(37,99,235,.25); }
+.guide-city-card__tag.--orange { border-color: rgba(249,115,22,.7); background: rgba(249,115,22,.25); }
+
+/* ===== CAROUSEL ===== */
+.guide-carousel-section {
+  background: #fff;
+  padding: 56px 0;
+  color: rgb(26, 33, 40);
+  overflow: hidden;
+}
+.guide-carousel-section .guide-section__header h2 { color: rgb(26, 33, 40); }
+.guide-carousel-section .guide-section__header p { color: #64748b; }
+.guide-carousel-wrap { position: relative; }
+.guide-carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 20px;
+  scrollbar-width: none;
+}
+.guide-carousel-track::-webkit-scrollbar { display: none; }
+
+/* ArticleCard-style image cards */
+.guide-carousel-card {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 420px;
+  cursor: pointer;
+  transition: var(--guide-transition);
+  background: #e2e8f0;
+}
+.guide-carousel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.guide-carousel-card:hover img { transform: scale(1.05); }
+.guide-carousel-card__tags {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.guide-carousel-card__tag {
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255,255,255,.8);
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.guide-carousel-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.guide-carousel-card__title-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 22px;
+  flex: 1;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12);
+}
+.guide-carousel-card__title-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  color: rgb(26, 33, 40);
+}
+.guide-carousel-card__title-box p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 6px 0 0;
+  line-height: 1.4;
+}
+.guide-carousel-card__arrow {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--guide-transition);
+  color: rgb(26, 33, 40);
+}
+.guide-carousel-card:hover .guide-carousel-card__arrow {
+  background: var(--guide-primary);
+  color: #fff;
+}
+.guide-carousel-card__arrow svg { width: 20px; height: 20px; }
+
+/* Carousel Arrows */
+.guide-carousel-arrows {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.guide-carousel-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid var(--guide-border);
+  color: rgb(26, 33, 40);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--guide-transition);
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+}
+.guide-carousel-arrow:hover {
+  background: var(--guide-primary);
+  border-color: var(--guide-primary);
+  color: #fff;
+}
+.guide-carousel-arrow svg { width: 20px; height: 20px; }
+
+/* ===== CTA BANNER ===== */
+.guide-cta {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #ec4899 100%);
+  border-radius: var(--guide-radius);
+  padding: 48px 40px;
+  text-align: center;
+  color: #fff;
+}
+.guide-cta h2 { font-size: clamp(20px, 3vw, 28px); font-weight: 700; margin: 0 0 12px; }
+.guide-cta p { font-size: 15px; opacity: .9; margin: 0 0 28px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.guide-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: #fff;
+  color: rgb(26, 33, 40);
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: var(--guide-transition);
+}
+.guide-cta__btn:hover { background: rgba(255,255,255,.85); box-shadow: 0 4px 16px rgba(0,0,0,.15); transform: translateY(-1px); }
+
+/* ===== STATS BAR ===== */
+.guide-stats {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: #f8fafc;
+  border-radius: var(--guide-radius);
+  overflow: hidden;
+  border: 1px solid var(--guide-border);
+}
+.guide-stat {
+  flex: 1;
+  min-width: 150px;
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--guide-border);
+}
+.guide-stat:last-child { border-right: none; }
+.guide-stat__number {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--guide-primary), var(--guide-accent-violet));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.guide-stat__label {
+  font-size: 13px;
+  color: var(--guide-text-secondary);
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .guide-hero { padding: 44px 0 40px; }
+  .guide-section { padding: 40px 0; }
+  .guide-carousel-section { padding: 40px 0; }
+  .guide-cities-grid { grid-template-columns: 1fr 1fr; }
+  .guide-city-card { height: 260px; }
+  .guide-cta { padding: 36px 24px; }
+  .guide-carousel-card { flex: 0 0 300px; height: 380px; }
+  .guide-stats { flex-direction: column; }
+  .guide-stat { border-right: none; border-bottom: 1px solid var(--guide-border); }
+  .guide-stat:last-child { border-bottom: none; }
+}
+@media (max-width: 480px) {
+  .guide-cities-grid { grid-template-columns: 1fr; }
+  .guide-city-card { height: 240px; }
+  .guide-carousel-card { flex: 0 0 280px; height: 360px; }
+}
+</style>
+
+<div class="guide-page">
+
+  <!-- ===== HERO ===== -->
+  <section class="guide-hero">
+    <div class="guide-container guide-hero__inner">
+      <div class="guide-hero__badge">Путеводитель GdeOtel.ru — Города 2026</div>
+      <h1>Популярные города для путешествий<br>в 2026 году</h1>
+      <p class="guide-hero__sub">20 российских и 20 зарубежных городов, куда чаще всего ездят российские туристы. Узнайте, что посмотреть, где остановиться и сравните цены на отели.</p>
+      <div class="guide-hero__nav">
+        <a href="#russia" class="--primary">Города России</a>
+        <a href="#abroad" class="--accent">Зарубежные города</a>
+        <a href="/путеводитель/" class="--outline">Все направления</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="guide-accent-divider">
+
+  <!-- ===== STATS ===== -->
+  <section class="guide-section">
+    <div class="guide-container">
+      <div class="guide-stats">
+        <div class="guide-stat">
+          <div class="guide-stat__number">40</div>
+          <div class="guide-stat__label">городов в подборке</div>
+        </div>
+        <div class="guide-stat">
+          <div class="guide-stat__number">20</div>
+          <div class="guide-stat__label">российских направлений</div>
+        </div>
+        <div class="guide-stat">
+          <div class="guide-stat__number">20</div>
+          <div class="guide-stat__label">зарубежных направлений</div>
+        </div>
+        <div class="guide-stat">
+          <div class="guide-stat__number">2026</div>
+          <div class="guide-stat__label">актуальный сезон</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOP PICKS CAROUSEL ===== -->
+  <section class="guide-carousel-section">
+    <div class="guide-container">
+      <div class="guide-section__header" style="display:flex; align-items:flex-end; justify-content:space-between; text-align:left;">
+        <div>
+          <h2>Топ направлений сезона</h2>
+          <p style="margin:0;">Самые популярные города у российских путешественников прямо сейчас.</p>
+        </div>
+        <div class="guide-carousel-arrows">
+          <button class="guide-carousel-arrow" onclick="document.getElementById('topTrack').scrollBy({left:-356,behavior:'smooth'})" aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="guide-carousel-arrow" onclick="document.getElementById('topTrack').scrollBy({left:356,behavior:'smooth'})" aria-label="Вперёд">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="guide-carousel-wrap">
+        <div class="guide-carousel-track" id="topTrack">
+
+          <a href="/путеводитель/россия/санкт-петербург/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1556610961-2fecc5927173?w=680&h=840&fit=crop" alt="Санкт-Петербург" loading="lazy">
+            <div class="guide-carousel-card__tags"><span class="guide-carousel-card__tag">Россия</span><span class="guide-carousel-card__tag">#1</span></div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box"><h3>Санкт-Петербург</h3><p>Белые ночи, Эрмитаж, мосты и каналы</p></div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/путеводитель/турция/стамбул/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=680&h=840&fit=crop" alt="Стамбул" loading="lazy">
+            <div class="guide-carousel-card__tags"><span class="guide-carousel-card__tag">Турция</span><span class="guide-carousel-card__tag">#1 за рубежом</span></div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box"><h3>Стамбул</h3><p>Два континента, базары, мечети и Босфор</p></div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/путеводитель/россия/москва/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=680&h=840&fit=crop" alt="Москва" loading="lazy">
+            <div class="guide-carousel-card__tags"><span class="guide-carousel-card__tag">Россия</span><span class="guide-carousel-card__tag">#2</span></div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box"><h3>Москва</h3><p>Кремль, Москва-Сити, театры и парки</p></div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/путеводитель/таиланд/бангкок/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=680&h=840&fit=crop" alt="Бангкок" loading="lazy">
+            <div class="guide-carousel-card__tags"><span class="guide-carousel-card__tag">Таиланд</span><span class="guide-carousel-card__tag">Зимовка</span></div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box"><h3>Бангкок</h3><p>Храмы, стрит-фуд, ночная жизнь и шопинг</p></div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/путеводитель/россия/сочи/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=680&h=840&fit=crop" alt="Сочи" loading="lazy">
+            <div class="guide-carousel-card__tags"><span class="guide-carousel-card__tag">Россия</span><span class="guide-carousel-card__tag">Круглый год</span></div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box"><h3>Сочи</h3><p>Море, горы, Олимпийский парк и Красная Поляна</p></div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+          <a href="/путеводитель/оаэ/дубай/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=680&h=840&fit=crop" alt="Дубай" loading="lazy">
+            <div class="guide-carousel-card__tags"><span class="guide-carousel-card__tag">ОАЭ</span><span class="guide-carousel-card__tag">Люкс</span></div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box"><h3>Дубай</h3><p>Небоскрёбы, пляжи, моллы и пустынные сафари</p></div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RUSSIAN CITIES ===== -->
+  <section class="guide-section" id="russia">
+    <div class="guide-container">
+      <div class="guide-section__header">
+        <h2>Города России</h2>
+        <p>Топ-20 российских городов для путешествий в 2026 году — от выходных поездок до длинных маршрутов.</p>
+      </div>
+      <div class="guide-cities-grid">
+
+        <a href="/путеводитель/россия/санкт-петербург/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1556610961-2fecc5927173?w=600&h=400&fit=crop" alt="Санкт-Петербург" loading="lazy">
+          <span class="guide-city-card__tag --pink">Хит сезона</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-pink)"></div>
+            <div class="guide-city-card__title">Санкт-Петербург</div>
+            <div class="guide-city-card__sub">Эрмитаж, белые ночи, мосты и каналы</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/москва/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1513326738677-b964603b136d?w=600&h=400&fit=crop" alt="Москва" loading="lazy">
+          <span class="guide-city-card__tag --violet">Столица</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Москва</div>
+            <div class="guide-city-card__sub">Кремль, парки, театры и Москва-Сити</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/сочи/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=600&h=400&fit=crop" alt="Сочи" loading="lazy">
+          <span class="guide-city-card__tag --emerald">Круглый год</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Сочи</div>
+            <div class="guide-city-card__sub">Море, горы, парк развлечений и Красная Поляна</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/казань/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1593182440959-9d4e7a0029b0?w=600&h=400&fit=crop" alt="Казань" loading="lazy">
+          <span class="guide-city-card__tag --amber">Микс культур</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent)"></div>
+            <div class="guide-city-card__title">Казань</div>
+            <div class="guide-city-card__sub">Кремль, мечеть Кул-Шариф и берег Волги</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/калининград/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1580745294071-9038dbcb6a1e?w=600&h=400&fit=crop" alt="Калининград" loading="lazy">
+          <span class="guide-city-card__tag --blue">Европа в&nbsp;РФ</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-primary)"></div>
+            <div class="guide-city-card__title">Калининград</div>
+            <div class="guide-city-card__sub">Куршская коса, янтарь и архитектура</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/нижний-новгород/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&h=400&fit=crop" alt="Нижний Новгород" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Нижний Новгород</div>
+            <div class="guide-city-card__sub">Кремль, стрелка рек, стрит-арт</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/екатеринбург/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1564694202883-46e7571e69c1?w=600&h=400&fit=crop" alt="Екатеринбург" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Екатеринбург</div>
+            <div class="guide-city-card__sub">Граница Европы и Азии, конструктивизм</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/владивосток/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1571073014631-9a3bd2b72bde?w=600&h=400&fit=crop" alt="Владивосток" loading="lazy">
+          <span class="guide-city-card__tag --orange">Дальний Восток</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Владивосток</div>
+            <div class="guide-city-card__sub">Мосты, бухты, морепродукты и Азия рядом</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/красноярск/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1524113015-bf14c9007e4f?w=600&h=400&fit=crop" alt="Красноярск" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Красноярск</div>
+            <div class="guide-city-card__sub">Столбы, Енисей и суровая красота Сибири</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/новосибирск/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=600&h=400&fit=crop" alt="Новосибирск" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-primary)"></div>
+            <div class="guide-city-card__title">Новосибирск</div>
+            <div class="guide-city-card__sub">Академгородок, театр оперы и транссиб</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/ростов-на-дону/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=600&h=400&fit=crop" alt="Ростов-на-Дону" loading="lazy">
+          <span class="guide-city-card__tag --amber">Юг России</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent)"></div>
+            <div class="guide-city-card__title">Ростов-на-Дону</div>
+            <div class="guide-city-card__sub">Набережная, Дон, казачья кухня</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/самара/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1580137189272-c9379f8864fd?w=600&h=400&fit=crop" alt="Самара" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-pink)"></div>
+            <div class="guide-city-card__title">Самара</div>
+            <div class="guide-city-card__sub">Волжская набережная, бункер Сталина</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/мурманск/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1531804055935-76f44d7c3621?w=600&h=400&fit=crop" alt="Мурманск" loading="lazy">
+          <span class="guide-city-card__tag --blue">Северное сияние</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-primary)"></div>
+            <div class="guide-city-card__title">Мурманск</div>
+            <div class="guide-city-card__sub">Полярное сияние, Арктика и ледокол «Ленин»</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/волгоград/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1623072329399-8e36a7276068?w=600&h=400&fit=crop" alt="Волгоград" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Волгоград</div>
+            <div class="guide-city-card__sub">Мамаев Курган, Родина-мать и Волга</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/иркутск/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1551845041-63e8e76836ea?w=600&h=400&fit=crop" alt="Иркутск" loading="lazy">
+          <span class="guide-city-card__tag --emerald">Ворота Байкала</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Иркутск</div>
+            <div class="guide-city-card__sub">Деревянное зодчество и путь к Байкалу</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/тюмень/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1572883454114-1cf0031ede2a?w=600&h=400&fit=crop" alt="Тюмень" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Тюмень</div>
+            <div class="guide-city-card__sub">Горячие источники и набережная Туры</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/махачкала/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1625225233840-695456021cde?w=600&h=400&fit=crop" alt="Махачкала" loading="lazy">
+          <span class="guide-city-card__tag --pink">Открытие</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-pink)"></div>
+            <div class="guide-city-card__title">Махачкала</div>
+            <div class="guide-city-card__sub">Каспийское море, каньоны и горная кухня</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/ярославль/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1590756254933-2873d72a83b6?w=600&h=400&fit=crop" alt="Ярославль" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent)"></div>
+            <div class="guide-city-card__title">Ярославль</div>
+            <div class="guide-city-card__sub">Золотое кольцо, Волга и древние храмы</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/пермь/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?w=600&h=400&fit=crop" alt="Пермь" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-primary)"></div>
+            <div class="guide-city-card__title">Пермь</div>
+            <div class="guide-city-card__sub">Кунгурская пещера и пермская деревянная скульптура</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/россия/петрозаводск/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1560408222-5024cd501672?w=600&h=400&fit=crop" alt="Петрозаводск" loading="lazy">
+          <span class="guide-city-card__tag --emerald">Карелия</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Петрозаводск</div>
+            <div class="guide-city-card__sub">Кижи, Онежское озеро и природа Карелии</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="guide-accent-divider">
+
+  <!-- ===== FOREIGN CITIES ===== -->
+  <section class="guide-section guide-section--alt" id="abroad">
+    <div class="guide-container">
+      <div class="guide-section__header">
+        <h2>Зарубежные города</h2>
+        <p>Топ-20 зарубежных городов, куда чаще всего летают российские туристы в 2026 году.</p>
+      </div>
+      <div class="guide-cities-grid">
+
+        <a href="/путеводитель/турция/стамбул/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&h=400&fit=crop" alt="Стамбул" loading="lazy">
+          <span class="guide-city-card__tag --pink">Хит сезона</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-pink)"></div>
+            <div class="guide-city-card__title">Стамбул</div>
+            <div class="guide-city-card__sub">Босфор, базары, Айя-София и уличная еда</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/турция/анталья/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=600&h=400&fit=crop" alt="Анталья" loading="lazy">
+          <span class="guide-city-card__tag --amber">Пляж + Город</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent)"></div>
+            <div class="guide-city-card__title">Анталья</div>
+            <div class="guide-city-card__sub">Старый город, пляжи Лары и водопады</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/оаэ/дубай/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=400&fit=crop" alt="Дубай" loading="lazy">
+          <span class="guide-city-card__tag --violet">Люкс</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Дубай</div>
+            <div class="guide-city-card__sub">Бурдж-Халифа, моллы, пляжи и пустыня</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/таиланд/бангкок/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=600&h=400&fit=crop" alt="Бангкок" loading="lazy">
+          <span class="guide-city-card__tag --orange">Зимовка</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Бангкок</div>
+            <div class="guide-city-card__sub">Храмы, стрит-фуд, ночные рынки</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/таиланд/пхукет/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=600&h=400&fit=crop" alt="Пхукет" loading="lazy">
+          <span class="guide-city-card__tag --emerald">Остров</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Пхукет</div>
+            <div class="guide-city-card__sub">Пляжи, дайвинг и тропическая природа</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/египет/хургада/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1539768942893-daf53e736b68?w=600&h=400&fit=crop" alt="Хургада" loading="lazy">
+          <span class="guide-city-card__tag --amber">All Inclusive</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent)"></div>
+            <div class="guide-city-card__title">Хургада</div>
+            <div class="guide-city-card__sub">Красное море, кораллы и недорогой отдых</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/египет/шарм-эль-шейх/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1596627116790-af6f46ddbbde?w=600&h=400&fit=crop" alt="Шарм-эль-Шейх" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-primary)"></div>
+            <div class="guide-city-card__title">Шарм-эль-Шейх</div>
+            <div class="guide-city-card__sub">Дайвинг, рифы и прямые рейсы</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/китай/пекин/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=600&h=400&fit=crop" alt="Пекин" loading="lazy">
+          <span class="guide-city-card__tag --pink">Тренд 2026</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-pink)"></div>
+            <div class="guide-city-card__title">Пекин</div>
+            <div class="guide-city-card__sub">Великая Стена, Запретный город и хутуны</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/китай/шанхай/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1537531383496-f4749b802030?w=600&h=400&fit=crop" alt="Шанхай" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Шанхай</div>
+            <div class="guide-city-card__sub">Набережная Бунд, небоскрёбы и современный Китай</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/китай/хайнань/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop" alt="Хайнань" loading="lazy">
+          <span class="guide-city-card__tag --emerald">Безвиз</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Хайнань</div>
+            <div class="guide-city-card__sub">Тропический остров, спа и чистые пляжи</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/вьетнам/нячанг/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=600&h=400&fit=crop" alt="Нячанг" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Нячанг</div>
+            <div class="guide-city-card__sub">Пляжи, острова и доступный Вьетнам</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/грузия/тбилиси/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=600&h=400&fit=crop" alt="Тбилиси" loading="lazy">
+          <span class="guide-city-card__tag --orange">Кавказ</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Тбилиси</div>
+            <div class="guide-city-card__sub">Старый город, серные бани и грузинская кухня</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/армения/ереван/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1603921494020-b600e6e2e4a6?w=600&h=400&fit=crop" alt="Ереван" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-pink)"></div>
+            <div class="guide-city-card__title">Ереван</div>
+            <div class="guide-city-card__sub">Розовый город, Арарат и каскадная лестница</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/шри-ланка/коломбо/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1588598198321-9735fd511c98?w=600&h=400&fit=crop" alt="Коломбо" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Коломбо</div>
+            <div class="guide-city-card__sub">Океан, чайные плантации и древние руины</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/индонезия/бали/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&h=400&fit=crop" alt="Бали" loading="lazy">
+          <span class="guide-city-card__tag --violet">Зимовка</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Бали</div>
+            <div class="guide-city-card__sub">Рисовые террасы, храмы и сёрфинг</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/мальдивы/мале/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&h=400&fit=crop" alt="Мальдивы" loading="lazy">
+          <span class="guide-city-card__tag --blue">Премиум</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-primary)"></div>
+            <div class="guide-city-card__title">Мальдивы</div>
+            <div class="guide-city-card__sub">Бунгало над водой и лучшие пляжи мира</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/узбекистан/самарканд/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=600&h=400&fit=crop" alt="Самарканд" loading="lazy">
+          <span class="guide-city-card__tag --amber">Шёлковый путь</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent)"></div>
+            <div class="guide-city-card__title">Самарканд</div>
+            <div class="guide-city-card__sub">Регистан, мозаика и восточный колорит</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/оаэ/абу-даби/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1511400820068-66a0b4557878?w=600&h=400&fit=crop" alt="Абу-Даби" loading="lazy">
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-violet)"></div>
+            <div class="guide-city-card__title">Абу-Даби</div>
+            <div class="guide-city-card__sub">Лувр, мечеть шейха Зайда и остров Яс</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/куба/гавана/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1500759285222-a95626b934cb?w=600&h=400&fit=crop" alt="Гавана" loading="lazy">
+          <span class="guide-city-card__tag --orange">Ретро</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-orange)"></div>
+            <div class="guide-city-card__title">Гавана</div>
+            <div class="guide-city-card__sub">Ретро-авто, Малекон и кубинский ром</div>
+          </div>
+        </a>
+
+        <a href="/путеводитель/индия/гоа/" class="guide-city-card">
+          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600&h=400&fit=crop" alt="Гоа" loading="lazy">
+          <span class="guide-city-card__tag --emerald">Зимовка</span>
+          <div class="guide-city-card__body">
+            <div class="guide-city-card__accent-line" style="background:var(--guide-accent-emerald)"></div>
+            <div class="guide-city-card__title">Гоа</div>
+            <div class="guide-city-card__sub">Пляжи, йога, фри-маркеты и закаты</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="guide-section">
+    <div class="guide-container">
+      <div class="guide-cta">
+        <h2>Выбрали город? Сравните цены на отели</h2>
+        <p>Откройте страницу направления, узнайте, где лучше остановиться — и сразу перейдите к сравнению цен на отели и апартаменты.</p>
+        <a href="/отели/" class="guide-cta__btn">Перейти к отелям →</a>
+      </div>
+    </div>
+  </section>
+
+</div>
