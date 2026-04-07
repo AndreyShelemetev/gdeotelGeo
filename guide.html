@@ -325,19 +325,147 @@
 }
 .guide-cta__btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
 
+/* ===== DARK CAROUSEL SECTION ===== */
+.guide-carousel-section {
+  background: #1a1a2e;
+  padding: 56px 0;
+  color: #fff;
+  overflow: hidden;
+}
+.guide-carousel-section .guide-section__header h2 { color: #fff; }
+.guide-carousel-section .guide-section__header p { color: rgba(255,255,255,.6); }
+
+.guide-carousel-wrap {
+  position: relative;
+}
+.guide-carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 20px;
+  scrollbar-width: none;
+}
+.guide-carousel-track::-webkit-scrollbar { display: none; }
+
+.guide-carousel-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--guide-radius);
+  padding: 28px 24px;
+  transition: var(--guide-transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.guide-carousel-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(37,99,235,.15) 0%, rgba(14,165,233,.1) 100%);
+  opacity: 0;
+  transition: var(--guide-transition);
+}
+.guide-carousel-card:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.3);
+}
+.guide-carousel-card:hover::before { opacity: 1; }
+.guide-carousel-card__content { position: relative; z-index: 1; }
+.guide-carousel-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #fff;
+}
+.guide-carousel-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  margin: 0 0 18px;
+  line-height: 1.5;
+}
+.guide-carousel-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 100px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--guide-transition);
+  cursor: pointer;
+}
+.guide-carousel-card:hover .guide-carousel-card__btn {
+  background: var(--guide-primary);
+  border-color: var(--guide-primary);
+}
+.guide-carousel-card__btn svg {
+  width: 14px;
+  height: 14px;
+  transition: transform .2s ease;
+}
+.guide-carousel-card:hover .guide-carousel-card__btn svg {
+  transform: translateX(3px);
+}
+
+/* Carousel Arrows */
+.guide-carousel-arrows {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.guide-carousel-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--guide-transition);
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+}
+.guide-carousel-arrow:hover {
+  background: var(--guide-primary);
+  border-color: var(--guide-primary);
+}
+.guide-carousel-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .guide-hero { padding: 44px 0 40px; }
   .guide-section { padding: 40px 0; }
+  .guide-carousel-section { padding: 40px 0; }
   .guide-split { grid-template-columns: 1fr; }
   .guide-split-card { min-height: 240px; }
   .guide-destinations { grid-template-columns: 1fr 1fr; }
   .guide-cta { padding: 36px 24px; }
+  .guide-carousel-card { flex: 0 0 260px; }
+  .guide-carousel-arrows { margin-bottom: 16px; }
 }
 @media (max-width: 480px) {
   .guide-destinations { grid-template-columns: 1fr; }
   .guide-countries { grid-template-columns: 1fr 1fr; }
   .guide-features { grid-template-columns: 1fr; }
+  .guide-carousel-card { flex: 0 0 240px; }
 }
 </style>
 
@@ -350,51 +478,82 @@
       <h1>Куда поехать, что посмотреть<br>и где удобнее остановиться</h1>
       <p class="guide-hero__sub">Выбирайте направление для отпуска, коротких поездок и путешествий по России и за границу. Узнайте, когда лучше ехать, что смотреть и где жить — и сразу сравнивайте цены на отели.</p>
       <div class="guide-hero__nav">
-        <a href="#popular" class="--primary">🔥 Популярные направления</a>
-        <a href="#trips" class="--outline">🗺️ По типу поездки</a>
-        <a href="#russia" class="--outline">🇷🇺 Россия</a>
-        <a href="#abroad" class="--outline">🌍 За границу</a>
+        <a href="#popular" class="--primary">Популярные направления</a>
+        <a href="#trips" class="--outline">По типу поездки</a>
+        <a href="#russia" class="--outline">Россия</a>
+        <a href="#abroad" class="--outline">За границу</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== INTRO ===== -->
-  <section class="guide-section guide-section--alt">
+  <!-- ===== INTRO CAROUSEL (dark) ===== -->
+  <section class="guide-carousel-section">
     <div class="guide-container">
-      <div class="guide-section__header">
-        <h2>Планируйте поездку проще</h2>
-        <p>Здесь собраны страны, города, курорты и идеи для путешествий. Начните с направления или выберите формат отдыха: на выходные, у моря, с детьми, недорого или на природу.</p>
+      <div class="guide-section__header" style="display:flex; align-items:flex-end; justify-content:space-between; text-align:left;">
+        <div>
+          <h2>Планируйте поездку проще</h2>
+          <p style="margin:0;">Страны, города, курорты и идеи для путешествий — всё для выбора направления.</p>
+        </div>
+        <div class="guide-carousel-arrows">
+          <button class="guide-carousel-arrow" onclick="document.getElementById('featureTrack').scrollBy({left:-296,behavior:'smooth'})" aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="guide-carousel-arrow" onclick="document.getElementById('featureTrack').scrollBy({left:296,behavior:'smooth'})" aria-label="Вперёд">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="guide-features">
-        <div class="guide-feature">
-          <div class="guide-feature__icon">📅</div>
-          <h3>Когда ехать</h3>
-          <p>Подскажем лучший сезон для каждого направления и какой формат отдыха подойдёт в конкретное время года.</p>
-        </div>
-        <div class="guide-feature">
-          <div class="guide-feature__icon">📍</div>
-          <h3>Что посмотреть</h3>
-          <p>Основные места, прогулочные маршруты и точки, которые чаще всего включают в план путешествия.</p>
-        </div>
-        <div class="guide-feature">
-          <div class="guide-feature__icon">🏨</div>
-          <h3>Где остановиться</h3>
-          <p>Какой район, курорт или часть города выбрать — ближе к центру, у моря, для семьи или для прогулок.</p>
-        </div>
-        <div class="guide-feature">
-          <div class="guide-feature__icon">⏱️</div>
-          <h3>Сколько дней</h3>
-          <p>Быстро поймёте, хватит ли 2–3 дней или стоит закладывать полноценный отпуск.</p>
-        </div>
-        <div class="guide-feature">
-          <div class="guide-feature__icon">🎯</div>
-          <h3>Формат отдыха</h3>
-          <p>Море, горы, экскурсии, природа, с детьми — подбирайте сценарий поездки под свои задачи.</p>
-        </div>
-        <div class="guide-feature">
-          <div class="guide-feature__icon">💰</div>
-          <h3>Переход к отелям</h3>
-          <p>После выбора направления сразу сравнивайте цены на отели и гостиницы без перехода на другие сайты.</p>
+      <div class="guide-carousel-wrap">
+        <div class="guide-carousel-track" id="featureTrack">
+
+          <div class="guide-carousel-card">
+            <div class="guide-carousel-card__content">
+              <h3>Когда ехать</h3>
+              <p>Лучший сезон для каждого направления и формат отдыха по времени года.</p>
+              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+            </div>
+          </div>
+
+          <div class="guide-carousel-card">
+            <div class="guide-carousel-card__content">
+              <h3>Что посмотреть</h3>
+              <p>Основные места, маршруты и точки, которые включают в план путешествия.</p>
+              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+            </div>
+          </div>
+
+          <div class="guide-carousel-card">
+            <div class="guide-carousel-card__content">
+              <h3>Где остановиться</h3>
+              <p>Район, курорт или часть города — ближе к центру, у моря, для семьи.</p>
+              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+            </div>
+          </div>
+
+          <div class="guide-carousel-card">
+            <div class="guide-carousel-card__content">
+              <h3>Сколько дней</h3>
+              <p>Быстро поймёте, хватит ли 2–3 дней или нужен полноценный отпуск.</p>
+              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+            </div>
+          </div>
+
+          <div class="guide-carousel-card">
+            <div class="guide-carousel-card__content">
+              <h3>Формат отдыха</h3>
+              <p>Море, горы, экскурсии, с детьми — сценарий поездки под ваши задачи.</p>
+              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+            </div>
+          </div>
+
+          <div class="guide-carousel-card">
+            <div class="guide-carousel-card__content">
+              <h3>Переход к отелям</h3>
+              <p>Сравнивайте цены на отели прямо из путеводителя без сторонних сайтов.</p>
+              <span class="guide-carousel-card__btn">Смотреть отели <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
