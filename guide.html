@@ -325,15 +325,15 @@
 }
 .guide-cta__btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
 
-/* ===== DARK CAROUSEL SECTION ===== */
+/* ===== CAROUSEL SECTION (light, ArticleCard style) ===== */
 .guide-carousel-section {
-  background: #1a1a2e;
+  background: #fff;
   padding: 56px 0;
-  color: #fff;
+  color: rgb(26, 33, 40);
   overflow: hidden;
 }
-.guide-carousel-section .guide-section__header h2 { color: #fff; }
-.guide-carousel-section .guide-section__header p { color: rgba(255,255,255,.6); }
+.guide-carousel-section .guide-section__header h2 { color: rgb(26, 33, 40); }
+.guide-carousel-section .guide-section__header p { color: #64748b; }
 
 .guide-carousel-wrap {
   position: relative;
@@ -350,74 +350,110 @@
 }
 .guide-carousel-track::-webkit-scrollbar { display: none; }
 
+/* ArticleCard-style image cards */
 .guide-carousel-card {
-  flex: 0 0 280px;
+  flex: 0 0 340px;
   scroll-snap-align: start;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: var(--guide-radius);
-  padding: 28px 24px;
-  transition: var(--guide-transition);
-  cursor: pointer;
-  position: relative;
+  border-radius: 20px;
   overflow: hidden;
-}
-.guide-carousel-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(37,99,235,.15) 0%, rgba(14,165,233,.1) 100%);
-  opacity: 0;
-  transition: var(--guide-transition);
-}
-.guide-carousel-card:hover {
-  background: rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.25);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,.3);
-}
-.guide-carousel-card:hover::before { opacity: 1; }
-.guide-carousel-card__content { position: relative; z-index: 1; }
-.guide-carousel-card h3 {
-  font-size: 17px;
-  font-weight: 700;
-  margin: 0 0 8px;
-  color: #fff;
-}
-.guide-carousel-card p {
-  font-size: 13px;
-  color: rgba(255,255,255,.65);
-  margin: 0 0 18px;
-  line-height: 1.5;
-}
-.guide-carousel-card__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 18px;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 100px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  transition: var(--guide-transition);
+  position: relative;
+  height: 420px;
   cursor: pointer;
+  transition: var(--guide-transition);
+  background: #e2e8f0;
 }
-.guide-carousel-card:hover .guide-carousel-card__btn {
-  background: var(--guide-primary);
-  border-color: var(--guide-primary);
+.guide-carousel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
 }
-.guide-carousel-card__btn svg {
-  width: 14px;
-  height: 14px;
-  transition: transform .2s ease;
-}
-.guide-carousel-card:hover .guide-carousel-card__btn svg {
-  transform: translateX(3px);
+.guide-carousel-card:hover img {
+  transform: scale(1.05);
 }
 
-/* Carousel Arrows */
+/* Tags on top */
+.guide-carousel-card__tags {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.guide-carousel-card__tag {
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255,255,255,.8);
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+/* Title card at bottom */
+.guide-carousel-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.guide-carousel-card__title-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 22px;
+  flex: 1;
+  box-shadow: 0 4px 20px rgba(0,0,0,.12);
+}
+.guide-carousel-card__title-box h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  color: rgb(26, 33, 40);
+}
+.guide-carousel-card__title-box p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 6px 0 0;
+  line-height: 1.4;
+}
+
+/* Arrow button */
+.guide-carousel-card__arrow {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--guide-transition);
+  color: rgb(26, 33, 40);
+}
+.guide-carousel-card:hover .guide-carousel-card__arrow {
+  background: var(--guide-primary);
+  color: #fff;
+}
+.guide-carousel-card__arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Carousel Arrows (header) */
 .guide-carousel-arrows {
   display: flex;
   gap: 8px;
@@ -428,9 +464,9 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.2);
-  color: #fff;
+  background: #f1f5f9;
+  border: 1px solid var(--guide-border);
+  color: rgb(26, 33, 40);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -443,6 +479,7 @@
 .guide-carousel-arrow:hover {
   background: var(--guide-primary);
   border-color: var(--guide-primary);
+  color: #fff;
 }
 .guide-carousel-arrow svg {
   width: 20px;
@@ -458,14 +495,14 @@
   .guide-split-card { min-height: 240px; }
   .guide-destinations { grid-template-columns: 1fr 1fr; }
   .guide-cta { padding: 36px 24px; }
-  .guide-carousel-card { flex: 0 0 260px; }
+  .guide-carousel-card { flex: 0 0 300px; height: 380px; }
   .guide-carousel-arrows { margin-bottom: 16px; }
 }
 @media (max-width: 480px) {
   .guide-destinations { grid-template-columns: 1fr; }
   .guide-countries { grid-template-columns: 1fr 1fr; }
   .guide-features { grid-template-columns: 1fr; }
-  .guide-carousel-card { flex: 0 0 240px; }
+  .guide-carousel-card { flex: 0 0 280px; height: 360px; }
 }
 </style>
 
@@ -506,53 +543,94 @@
       <div class="guide-carousel-wrap">
         <div class="guide-carousel-track" id="featureTrack">
 
-          <div class="guide-carousel-card">
-            <div class="guide-carousel-card__content">
-              <h3>Когда ехать</h3>
-              <p>Лучший сезон для каждого направления и формат отдыха по времени года.</p>
-              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+          <a href="/путеводитель/турция/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=680&h=840&fit=crop" alt="Когда ехать" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Сезоны</span>
+              <span class="guide-carousel-card__tag">Планирование</span>
             </div>
-          </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Когда лучше ехать в отпуск</h3>
+                <p>Лучший сезон для каждого направления</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
 
-          <div class="guide-carousel-card">
-            <div class="guide-carousel-card__content">
-              <h3>Что посмотреть</h3>
-              <p>Основные места, маршруты и точки, которые включают в план путешествия.</p>
-              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+          <a href="/путеводитель/россия/санкт-петербург/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1548834925-e48f8a27ae6f?w=680&h=840&fit=crop" alt="Что посмотреть" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Достопримечательности</span>
+              <span class="guide-carousel-card__tag">Маршруты</span>
             </div>
-          </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Что посмотреть и куда сходить</h3>
+                <p>Основные места и прогулочные маршруты</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
 
-          <div class="guide-carousel-card">
-            <div class="guide-carousel-card__content">
-              <h3>Где остановиться</h3>
-              <p>Район, курорт или часть города — ближе к центру, у моря, для семьи.</p>
-              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+          <a href="/путеводитель/таиланд/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=680&h=840&fit=crop" alt="Где остановиться" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Отели</span>
+              <span class="guide-carousel-card__tag">Районы</span>
             </div>
-          </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Где лучше остановиться</h3>
+                <p>Район, курорт или часть города для вашей поездки</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
 
-          <div class="guide-carousel-card">
-            <div class="guide-carousel-card__content">
-              <h3>Сколько дней</h3>
-              <p>Быстро поймёте, хватит ли 2–3 дней или нужен полноценный отпуск.</p>
-              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+          <a href="/путеводитель/египет/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1539768942893-daf53e736b68?w=680&h=840&fit=crop" alt="Сколько дней" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Планирование</span>
             </div>
-          </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>На сколько дней ехать</h3>
+                <p>2–3 дня, неделя или полноценный отпуск</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
 
-          <div class="guide-carousel-card">
-            <div class="guide-carousel-card__content">
-              <h3>Формат отдыха</h3>
-              <p>Море, горы, экскурсии, с детьми — сценарий поездки под ваши задачи.</p>
-              <span class="guide-carousel-card__btn">Подробнее <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+          <a href="/путеводитель/россия/дагестан/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1625225233840-695456021cde?w=680&h=840&fit=crop" alt="Формат отдыха" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Активности</span>
+              <span class="guide-carousel-card__tag">Природа</span>
             </div>
-          </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Выберите формат отдыха</h3>
+                <p>Море, горы, экскурсии или поездка с детьми</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
 
-          <div class="guide-carousel-card">
-            <div class="guide-carousel-card__content">
-              <h3>Переход к отелям</h3>
-              <p>Сравнивайте цены на отели прямо из путеводителя без сторонних сайтов.</p>
-              <span class="guide-carousel-card__btn">Смотреть отели <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"/></svg></span>
+          <a href="/отели/" class="guide-carousel-card">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=680&h=840&fit=crop" alt="Отели" loading="lazy">
+            <div class="guide-carousel-card__tags">
+              <span class="guide-carousel-card__tag">Сравнение цен</span>
+              <span class="guide-carousel-card__tag">Бронирование</span>
             </div>
-          </div>
+            <div class="guide-carousel-card__overlay">
+              <div class="guide-carousel-card__title-box">
+                <h3>Переход к отелям</h3>
+                <p>Сравните цены прямо из путеводителя</p>
+              </div>
+              <span class="guide-carousel-card__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </a>
 
         </div>
       </div>
